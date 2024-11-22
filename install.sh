@@ -31,17 +31,6 @@ load_config() {
     fi
 }
 
-animate_text() {
-    local text="$1"
-    if [ "$DISABLE_ANIMATIONS" -eq 1 ]; then
-        echo "$text"
-    else
-        for ((i=0; i<${#text}; i++)); do
-            echo -en "${text:$i:1}"
-        done
-        echo ""
-    fi
-}
 
 load_config
 
@@ -76,51 +65,14 @@ echo ""
 
 # Tambahkan bagian lain dari skrip Anda di sini jika diperlukan
 # Fungsi untuk menampilkan animasi loading
-loading_animation() {
-    local spinstr='|/-\'
-    local loading_text="LOADING..."
-    local i=0
-    while [ $i -lt ${#loading_text} ]; do
-        local temp=${spinstr#?}
-        printf " [%c] %s" "$spinstr" "${loading_text:0:i+1}"
-        local spinstr=$temp${spinstr%"$temp"}
-        printf "\r"
-        i=$((i + 1))
-    done
-    printf "\r\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
-}
+
 
 # Fungsi untuk menampilkan teks animasi
-animate_text() {
-    local text=$1
-    for ((i=0; i<${#text}; i++)); do
-        printf "%s" "${text:$i:1}"
-    done
-    echo ""
-}
+
 
 # Menampilkan teks dengan animasi
 echo -e "${BLUE}(𝗔𝗨𝗧𝗢𝗠𝗔𝗧𝗜𝗖) 𝖫ICENSE ANDA BENAR, TERIMAKASIH TELAH MEMBELI LICENSE INI YA${RESET}"
-animate_text "OPSI ADA DIBAWAH INI"
-# Fungsi untuk menampilkan animasi loading
-loading_animation() {
-    local spinstr='|/-\'
-    local loading_text="LOADING"
-    local i=0
-    while [ $i -lt ${#loading_text} ]; do
-        local temp=${spinstr#?}
-        printf " [%c] %s" "$spinstr" "${loading_text:0:i+1}"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\r"
-        i=$((i + 1))
-    done
-    printf "\r\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
-}
-
-# Animasi loading dan menghapus
-loading_animation
-echo -ne "\033[K"  # Menghapus teks loading dari baris
+echo "OPSI ADA DIBAWAH INI"
 
 echo "𝗧𝗛𝗘𝗠𝗘 ( 𝗙𝗜𝗟𝗘𝗦 )"
 echo "1. INSTALL THEME ELYSIUM PTERODACTYL"
@@ -200,7 +152,7 @@ case "$OPTION" in
         yarn build:production
         php artisan migrate
         php artisan view:clear
-        animate_text "Tema Elysium berhasil diinstal."
+        echo "Tema Elysium berhasil diinstal."
         ;;
     4)
         # Masukkan token GitHub langsung di sini
@@ -223,7 +175,7 @@ case "$OPTION" in
         cd /var/www/pterodactyl
         bash installer.bash
 
-        animate_text "AUTO SUSPEND BERHASIL DIINSTALL"
+        echo "AUTO SUSPEND BERHASIL DIINSTALL"
 
         # Ganti dengan token dan URL file
         FILE_URL="https://raw.githubusercontent.com/username/repo/main/path/to/file"
@@ -234,9 +186,9 @@ case "$OPTION" in
 
         # Informasi hasil
         if [ $? -eq 0 ]; then
-            animate_text "File berhasil diunduh ke ${DESTINATION}"
+            echo "File berhasil diunduh ke ${DESTINATION}"
         else
-            animate_text "Gagal mengunduh file"
+            echo "Gagal mengunduh file"
         fi
         ;;
 
@@ -562,9 +514,9 @@ echo -e "${BLUE} KETIK yes UNTUK MELANJUTKAN${RESET}"
 
         # Informasi hasil
         if [ $? -eq 0 ]; then
-            animate_text "File berhasil diunduh ke ${DESTINATION}"
+            echo "File berhasil diunduh ke ${DESTINATION}"
         else
-            animate_text "Gagal mengunduh file"
+            echo "Gagal mengunduh file"
         fi
         ;;
         10)
@@ -721,4 +673,4 @@ fi
         ;;
 esac
 
-animate_text "𝗣𝗥𝗢𝗦𝗘𝗦 𝗦𝗘𝗟𝗘𝗦𝗔𝗜"
+echo "𝗣𝗥𝗢𝗦𝗘𝗦 𝗦𝗘𝗟𝗘𝗦𝗔𝗜"
