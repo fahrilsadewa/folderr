@@ -117,7 +117,7 @@ read -p "PILIH OPSI (1-16): " OPTION
 case "$OPTION" in
     1)
         # Masukkan token GitHub langsung di sini
-        GITHUB_TOKEN="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"
+        GITHUB_TOKEN="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"
 
         # Clone repositori menggunakan token
         REPO_URL="https://github.com/LeXcZxMoDz9/folderr.git"
